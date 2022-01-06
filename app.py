@@ -23,7 +23,7 @@ model = load_model(MODEL_PATH)
 
 def model_predict(img_path, model):
 
-    img = image.load_img(img_path, target_size=(500, 500))
+    img = image.load_img(img_path, target_size=(200, 200))
 
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
