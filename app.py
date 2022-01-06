@@ -10,10 +10,11 @@ import numpy as np
 from tensorflow.keras.applications.imagenet_utils import preprocess_input, decode_predictions
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
-
+from tensorflow.keras.layers import Flatten
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
+from skimage import transform
 
 app = Flask(__name__)
 
@@ -25,9 +26,16 @@ def model_predict(img_path, model):
 
     img = image.load_img(img_path, target_size=(200, 200))
 
-    img = image.img_to_array(img)
+    img = np.array(img).astype('float32')/255
+    img = transform.resize(img, (200,200, 3))
     img = np.expand_dims(img, axis=0)
-   
+
+
+
+
+    #img = image.img_to_array(img)
+    #img = np.expand_dims(img,axis=0)
+
     preds = model.predict(img)
     print("Tahmin Olasılıkları :",preds)
     print("-------------------------------")
