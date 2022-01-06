@@ -14,9 +14,9 @@ from tensorflow.keras.layers import Flatten
 # Flask utils
 from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
-#from skimage import transform
+from skimage import transform
 import tensorflow
-import cv2
+
 app = Flask(__name__)
 
 MODEL_PATH = "f.h5"
@@ -24,29 +24,16 @@ MODEL_PATH = "f.h5"
 model = load_model(MODEL_PATH)
 
 def model_predict(img_path, model):
-       
 
-
-    array = np.array(img_path)
-    array=cv2.resize(array,(100,100))
-    preds = model.predict(np.array([array]))
-
-
-
-
-
-
-
-    
-    #img = image.load_img(img_path, target_size=(100, 100))
-    #img = np.array(img).astype('float32')/255
-    #img = transform.resize(img, (100,100, 3))
-    #img = np.expand_dims(img, axis=0)
+    img = image.load_img(img_path, target_size=(100, 100))
+    img = np.array(img).astype('float32')/255
+    img = transform.resize(img, (100,100, 3))
+    img = np.expand_dims(img, axis=0)
 
     #img = image.img_to_array(img)
     #img = np.expand_dims(img,axis=0)
 
-    #preds = model.predict(img)
+    preds = model.predict(img)
     print("Tahmin Olasılıkları :",preds)
     print("-------------------------------")
     preds=np.argmax(preds[0])
