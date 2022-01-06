@@ -17,7 +17,7 @@ from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
-MODEL_PATH = "flask1.h5"
+MODEL_PATH = "flask2.h5"
 
 model = load_model(MODEL_PATH)
 
