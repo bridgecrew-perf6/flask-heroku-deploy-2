@@ -18,16 +18,16 @@ from skimage import transform
 
 app = Flask(__name__)
 
-MODEL_PATH = "flask2.h5"
+MODEL_PATH = "f.h5"
 
 model = load_model(MODEL_PATH)
 
 def model_predict(img_path, model):
 
-    img = image.load_img(img_path, target_size=(200, 200))
+    img = image.load_img(img_path, target_size=(100, 100))
 
     img = np.array(img).astype('float32')/255
-    img = transform.resize(img, (200,200, 3))
+    img = transform.resize(img, (100,100, 3))
     img = np.expand_dims(img, axis=0)
 
 
