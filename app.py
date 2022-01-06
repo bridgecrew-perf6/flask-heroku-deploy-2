@@ -19,9 +19,8 @@ import tensorflow
 
 app = Flask(__name__)
 
-MODEL_PATH = "f.h5"
 
-model = load_model(MODEL_PATH)
+model = load_model("f.h5",compile=False)
 
 def model_predict(img_path, model):
 
